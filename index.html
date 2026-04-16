@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Aplicação de lista de tarefas com HTML, CSS e JavaScript puro."
+  />
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!--
+    Container principal da aplicação.
+    Ele centraliza o conteúdo e ajuda a manter a interface organizada.
+  -->
+  <main class="app">
+    <section class="todo-card" aria-labelledby="app-title">
+      <header class="app-header">
+        <div>
+          <p class="app-subtitle">Organização pessoal</p>
+          <h1 id="app-title">To-Do List</h1>
+        </div>
+
+        <!--
+          Resumo rápido da lista.
+          Esses números serão atualizados dinamicamente pelo JavaScript.
+        -->
+        <div class="summary" aria-label="Resumo das tarefas">
+          <article class="summary-item">
+            <span class="summary-label">Total</span>
+            <strong id="total-tasks">0</strong>
+          </article>
+          <article class="summary-item">
+            <span class="summary-label">Pendentes</span>
+            <strong id="pending-tasks">0</strong>
+          </article>
+          <article class="summary-item">
+            <span class="summary-label">Concluídas</span>
+            <strong id="completed-tasks">0</strong>
+          </article>
+        </div>
+      </header>
+
+      <!--
+        Formulário de criação de tarefas.
+        Foi usado <form> porque semanticamente representa uma entrada de dados.
+      -->
+      <form id="task-form" class="task-form" novalidate>
+        <div class="form-group">
+          <label for="task-input">Descrição da tarefa</label>
+          <input
+            type="text"
+            id="task-input"
+            name="task"
+            placeholder="Ex.: Estudar JavaScript por 1 hora"
+            maxlength="120"
+            required
+          />
+          <small class="helper-text">
+            Digite uma tarefa clara e objetiva.
+          </small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="priority-select">Prioridade</label>
+            <select id="priority-select" name="priority" required>
+              <option value="alta">Alta</option>
+              <option value="media" selected>Média</option>
+              <option value="baixa">Baixa</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="filter-select">Filtro da lista</label>
+            <select id="filter-select" name="filter">
+              <option value="all">Todas</option>
+              <option value="pending">Pendentes</option>
+              <option value="completed">Concluídas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Adicionar tarefa</button>
+          <button type="button" id="clear-completed-btn" class="btn btn-secondary">
+            Limpar concluídas
+          </button>
+        </div>
+
+        <!--
+          Área de feedback para erros ou mensagens curtas ao usuário.
+          O atributo aria-live ajuda leitores de tela a anunciarem atualizações.
+        -->
+        <p id="feedback-message" class="feedback-message" aria-live="polite"></p>
+      </form>
+
+      <section class="tasks-section" aria-labelledby="tasks-title">
+        <div class="tasks-header">
+          <h2 id="tasks-title">Minhas tarefas</h2>
+        </div>
+
+        <!--
+          Lista onde as tarefas serão inseridas pelo JavaScript.
+          Começa vazia no HTML porque o conteúdo é dinâmico.
+        -->
+        <ul id="task-list" class="task-list" aria-label="Lista de tarefas"></ul>
+
+        <!--
+          Mensagem exibida quando não houver tarefas.
+          O JavaScript controla quando esse bloco aparece.
+        -->
+        <div id="empty-state" class="empty-state">
+          <p>Nenhuma tarefa encontrada.</p>
+          <span>Adicione uma nova tarefa para começar.</span>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
